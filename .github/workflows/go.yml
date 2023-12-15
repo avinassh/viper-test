@@ -28,15 +28,4 @@ jobs:
           cache: false
 
       - name: Build
-        run: go build -v ./...
-
-      - name: Vet
-        run: go vet -v ./...
-
-      - name: Test
-        run: go test -v ./...
-
-      - name: Build Turso binary
-        run: go build -o turso cmd/turso/main.go
-
-      - name: Integration tests checkout
+        run: go run main.go

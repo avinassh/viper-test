@@ -9,8 +9,6 @@ import (
 
 	"github.com/kirsle/configdir"
 	"github.com/spf13/viper"
-	"github.com/tursodatabase/turso-cli/internal"
-	"github.com/tursodatabase/turso-cli/internal/flags"
 )
 
 type Settings struct {
@@ -61,15 +59,7 @@ func ReadSettings() (*Settings, error) {
 				return nil, err
 			}
 		case viper.ConfigParseError:
-			if flags.ResetConfig() {
-				viper.WriteConfig()
-				break
-			}
-			warning := internal.Warn("Warning")
-			flag := internal.Emph("--reset-config")
-			fmt.Printf("%s: could not parse JSON config from file %s\n", warning, internal.Emph(configFile))
-			fmt.Printf("Fix the syntax errors on the file, or use the %s flag to replace it with a fresh one.\n", flag)
-			fmt.Printf("E.g. turso auth login --reset-config\n")
+			fmt.Printf("Snipped: %v\n", err)
 			return nil, err
 		default:
 			return nil, err
